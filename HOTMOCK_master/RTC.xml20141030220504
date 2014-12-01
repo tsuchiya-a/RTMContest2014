@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rtc:RtcProfile rtc:version="0.2" rtc:id="RTC:Ayaka Tsuchiya:tool:HOTMOCK_master:1.1.1" xmlns:rtcExt="http://www.openrtp.org/namespaces/rtc_ext" xmlns:rtcDoc="http://www.openrtp.org/namespaces/rtc_doc" xmlns:rtc="http://www.openrtp.org/namespaces/rtc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <rtc:BasicInfo xsi:type="rtcExt:basic_info_ext" rtcExt:saveProject="HOTMOCK_master" rtc:updateDate="2014-10-20T11:12:42+09:00" rtc:creationDate="2014-10-20T11:12:42+09:00" rtc:abstract="HOTMOCKSettingとソケット通信を行い、HOTMOCKデバイスを使用するためのコンポーネント。" rtc:version="1.1.1" rtc:vendor="Ayaka Tsuchiya" rtc:maxInstances="1" rtc:executionType="PeriodicExecutionContext" rtc:executionRate="1000.0" rtc:description="Connect HOTMOCK devices with RTC" rtc:category="tool" rtc:componentKind="DataFlowComponent" rtc:activityType="PERIODIC" rtc:componentType="COMMUTATIVE" rtc:name="HOTMOCK_master">
+        <rtcDoc:Doc rtcDoc:reference="" rtcDoc:license="" rtcDoc:creator="土屋彩茜&lt;br/&gt;ma14076@shibaura-it.ac.jp" rtcDoc:algorithm="" rtcDoc:inout="InPort:&lt;name&gt;/&lt;datatype&gt;/&lt;documentation&gt;&lt;br/&gt;DO/TimedShort/ HOTMOCKデバイスのDO*に送信するデジタル出力値を取得するポート&lt;br/&gt;AO/TimedDouble/ HOTMOCKデバイスのAO*に送信するアナログ出力値を取得するポート&lt;br/&gt;Reset_PI/ TimedBoolean/HOTMOCKデバイスのPI*につながっているパルス入力の積算値をリセットするためのフラグを取得するポート&lt;br/&gt;&lt;br/&gt;OutPort:&lt;name&gt;/&lt;datatype&gt;/&lt;documentation&gt;&lt;br/&gt;DI/TimedShort/ HOTMOCKデバイスのDI*から受信したデジタル入力値を送るポート。&lt;br/&gt;AI/TimedDouble/ HOTMOCKデバイスのAI*から受信したアナログ入力値を送るポート。&lt;br/&gt;PI/TimedDouble/ HOTMOCKデバイスのPI*から受信したパルス入力値を送るポート。&lt;br/&gt;TemperatureSensor/TimedDouble/HOTMOCKデバイス内蔵の温度センサから受信した値を送るポート。&lt;br/&gt;GyroSensor/TimedDoubleSeq/HOTMOCKデバイス内蔵の加速度センサから受信した値を送るポート。値は要素数0から順にx,y,zの配列として送られる。&lt;br/&gt;&lt;br/&gt;Configuration:&lt;name&gt;/&lt;datatype&gt;/&lt; default&gt;/&lt;widget&gt;/&lt;documentation&gt;&lt;br/&gt;SettingFilename/string/*.hmst/text/HOTMOCKSettingによって作成されたHOTMOCKデバイスの設定ファイル名。&lt;br/&gt;IPAddress/string/127.0.0.1/text/HOTMOCKSettingのIPアドレス。&lt;br/&gt;PortNumber/int/8888/text/HOTMOCKSettingのPort番号。&lt;br/&gt;GetDataType/std::vector&lt;int&gt;/0,0,0,0/ordered_list/HOTMOCKデバイスからの入力を取得する際、0ならば生値を取得、1ならば工業変換値を取得する。配列0から順にAI,PI, TemperatureSensor,GyroSensorの設定をする。" rtcDoc:description="HOTMOCKSettingとソケット通信を行い、HOTMOCKデバイスを使用するためのコンポーネント。&lt;br/&gt;初期化時にデバイス設定ファイルを読み込み、ポートが生成される。"/>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+    </rtc:BasicInfo>
+    <rtc:Actions>
+        <rtc:OnInitialize xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="DynamicPortのRTCへの登録を行う。"/>
+        </rtc:OnInitialize>
+        <rtc:OnFinalize xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="DynamicPortの削除を行う。"/>
+        </rtc:OnFinalize>
+        <rtc:OnStartup xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnShutdown xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnActivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="HOTMOCKSettingが通信中になっていること。" rtcDoc:preCondition="HOTMOCKSettingが起動・シュミレーションモードになっていること。" rtcDoc:description="configurationで指定したHOTMOCKデバイスの設定ファイルを読み込み、ポートを生成する。その後ソケット通信を開始する。"/>
+        </rtc:OnActivated>
+        <rtc:OnDeactivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="ソケット通信を終了する。"/>
+        </rtc:OnDeactivated>
+        <rtc:OnAborting xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnError xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnReset xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="ソケット通信を終了する。"/>
+        </rtc:OnReset>
+        <rtc:OnExecute xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="ソケット通信によりHOTMOCKデバイスとデータのやり取りを行う。"/>
+        </rtc:OnExecute>
+        <rtc:OnStateUpdate xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnRateChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnAction xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnModeChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+    </rtc:Actions>
+    <rtc:ConfigurationSet>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="*.hmst" rtc:type="string" rtc:name="SettingFilename">
+            <rtcDoc:Doc rtcDoc:constraint="" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="HOTMOCKSettingによって作成されたHOTMOCKデバイスの設定ファイル名。" rtcDoc:defaultValue="*.hmst" rtcDoc:dataname="SettingFilename"/>
+            <rtcExt:Properties rtcExt:value="text" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="127.0.0.1" rtc:type="string" rtc:name="IPAddress">
+            <rtcDoc:Doc rtcDoc:constraint="" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="HOTMOCKSettingのIPアドレス。" rtcDoc:defaultValue="localhost" rtcDoc:dataname="IPAddress"/>
+            <rtcExt:Properties rtcExt:value="text" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="8888" rtc:type="int" rtc:name="PortNumber">
+            <rtcDoc:Doc rtcDoc:constraint="" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="HOTMOCKSettingのPort番号。" rtcDoc:defaultValue="8888" rtcDoc:dataname="PortNumber"/>
+            <rtcExt:Properties rtcExt:value="text" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="0,0,0,0" rtc:type="std::vector&lt;int&gt;" rtc:name="GetDataType">
+            <rtcDoc:Doc rtcDoc:constraint="" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="HOTMOCKデバイスからの入力を取得する際、&lt;br/&gt;0ならば生値を取得、1ならば工業変換値を取得する。&lt;br/&gt;配列0から順にAI,PI,TemperatureSensor,GyroSensorの設定をする。" rtcDoc:defaultValue="0,0,0,0" rtcDoc:dataname="GetDataType"/>
+            <rtcExt:Properties rtcExt:value="ordered_list" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+    </rtc:ConfigurationSet>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="DO" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="HOTMOCKデバイスのDO*に送信するデジタル出力値を取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedDouble" rtc:name="AO" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedDouble" rtcDoc:description="HOTMOCKデバイスのAO*に送信するアナログ出力値を取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedBoolean" rtc:name="Reset_PI" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedBoolean" rtcDoc:description="HOTMOCKデバイスのPI01につながっているパルス入力の積算値をリセットするためのフラグを取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="RIGHT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="DI" rtc:portType="DataOutPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="HOTMOCKデバイスのDI*から受信したデジタル入力値を送るポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="RIGHT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedDouble" rtc:name="AI" rtc:portType="DataOutPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedDouble" rtcDoc:description="HOTMOCKデバイスのAI*から受信したアナログ入力値を送るポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="RIGHT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedDouble" rtc:name="PI" rtc:portType="DataOutPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedDouble" rtcDoc:description="HOTMOCKデバイスのPI*から受信したパルス入力値を送るポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="RIGHT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedDouble" rtc:name="TemperatureSensor" rtc:portType="DataOutPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedDouble" rtcDoc:description="HOTMOCKデバイス内蔵の温度センサから受信した値を送るポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="RIGHT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedDoubleSeq" rtc:name="GyroSensor" rtc:portType="DataOutPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedDoubleSeq" rtcDoc:description="HOTMOCKデバイス内蔵の加速度センサから受信した値を送るポート。&lt;br/&gt;値は要素数0から順にx,y,zの配列として送られる。"/>
+    </rtc:DataPorts>
+    <rtc:Language xsi:type="rtcExt:language_ext" rtc:kind="C++"/>
+</rtc:RtcProfile>

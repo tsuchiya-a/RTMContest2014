@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rtc:RtcProfile rtc:version="0.2" rtc:id="RTC:Ayaka Tsuchiya:demonstration:KobukiControllerByHMSwitches:1.0.1" xmlns:rtcExt="http://www.openrtp.org/namespaces/rtc_ext" xmlns:rtcDoc="http://www.openrtp.org/namespaces/rtc_doc" xmlns:rtc="http://www.openrtp.org/namespaces/rtc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <rtc:BasicInfo xsi:type="rtcExt:basic_info_ext" rtcExt:saveProject="KobukiControllerByHMSwitches" rtc:updateDate="2014-10-29T22:27:40+09:00" rtc:creationDate="2014-10-29T22:27:40+09:00" rtc:abstract="HOTMOCKのスイッチでKobukiを動かすためのコンポーネント。
+bumperが障害物にあたったら停止する。" rtc:version="1.0.1" rtc:vendor="Ayaka Tsuchiya" rtc:maxInstances="1" rtc:executionType="PeriodicExecutionContext" rtc:executionRate="1000.0" rtc:description="HOTMOCK Switches Control Kobuki" rtc:category="demonstration" rtc:componentKind="DataFlowComponent" rtc:activityType="PERIODIC" rtc:componentType="COMMUTATIVE" rtc:name="KobukiControllerByHMSwitches">
+        <rtcDoc:Doc rtcDoc:reference="" rtcDoc:license="" rtcDoc:creator="土屋彩茜&lt;br/&gt;ma14076@shibaura-it.ac.jp" rtcDoc:algorithm="" rtcDoc:inout="InPort:&lt;name&gt;/&lt;datatype&gt;/&lt;documentation&gt;&lt;br/&gt;Forward/ TimedShort/前進指令を出すスイッチの値を取得するポート。&lt;br/&gt;Back/ TimedShort/後退指令を出すスイッチの値を取得するポート。&lt;br/&gt;Right/ TimedShort/右回りの指令を出すスイッチの値を取得するポート。&lt;br/&gt;Left/ TimedShort/左回りの指令を出すスイッチの値を取得するポート。&lt;br/&gt;BumperCheck/TimedBooleanSeq/bumperの当たり判定を取得するポート。&lt;br/&gt;&lt;br/&gt;OutPort:&lt;name&gt;/&lt;datatype&gt;/&lt;documentation&gt;&lt;br/&gt;Velocity/TimedVelocity2D/kobukiへの速度指令値を出力するポート。&lt;br/&gt;&lt;br/&gt;Configuration:&lt;name&gt;/&lt;datatype&gt;/&lt; default&gt;/&lt;widget&gt;/&lt;documentation&gt;&lt;br/&gt;Speed/double/0.2/text/Kobukiが前進・後退する時の速度。x&gt;=0&lt;br/&gt;RotSpeed/double/0.5/text/x&gt;=0/Kobukiが右回転・左回転する時の速度。" rtcDoc:description="HOTMOCKのスイッチでKobukiを動かすためのコンポーネント。&lt;br/&gt;bumperが障害物にあたったら停止する。"/>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+    </rtc:BasicInfo>
+    <rtc:Actions>
+        <rtc:OnInitialize xsi:type="rtcDoc:action_status_doc" rtc:implemented="true"/>
+        <rtc:OnFinalize xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnStartup xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnShutdown xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnActivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="現在の速度を0に初期化する。"/>
+        </rtc:OnActivated>
+        <rtc:OnDeactivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="Kobukiを停止させる。"/>
+        </rtc:OnDeactivated>
+        <rtc:OnAborting xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnError xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnReset xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnExecute xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="押されたスイッチによって速度指令を出力する。"/>
+        </rtc:OnExecute>
+        <rtc:OnStateUpdate xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnRateChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnAction xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnModeChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+    </rtc:Actions>
+    <rtc:ConfigurationSet>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="0.2" rtc:type="double" rtc:name="Speed">
+            <rtc:Constraint>
+                <rtc:ConstraintUnitType>
+                    <rtc:propertyIsGreaterThanOrEqualTo rtc:matchCase="false">
+                        <rtc:Literal>0</rtc:Literal>
+                    </rtc:propertyIsGreaterThanOrEqualTo>
+                </rtc:ConstraintUnitType>
+            </rtc:Constraint>
+            <rtcDoc:Doc rtcDoc:constraint="x&gt;=0" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="Kobukiが前進・後退する時の速度。" rtcDoc:defaultValue="0.2" rtcDoc:dataname="speed"/>
+            <rtcExt:Properties rtcExt:value="text" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="0.5" rtc:type="double" rtc:name="RotSpeed">
+            <rtc:Constraint>
+                <rtc:ConstraintUnitType>
+                    <rtc:propertyIsGreaterThanOrEqualTo rtc:matchCase="false">
+                        <rtc:Literal>0</rtc:Literal>
+                    </rtc:propertyIsGreaterThanOrEqualTo>
+                </rtc:ConstraintUnitType>
+            </rtc:Constraint>
+            <rtcDoc:Doc rtcDoc:constraint="x&gt;=0" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="Kobukiが右回転・左回転する時の速度。" rtcDoc:defaultValue="0.5" rtcDoc:dataname="rot_speed"/>
+            <rtcExt:Properties rtcExt:value="text" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+    </rtc:ConfigurationSet>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="Forward" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="前進指令を出すスイッチの値を取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="Back" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimeShort" rtcDoc:description="後退指令を出すスイッチの値を取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="Right" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="右回りの指令を出すスイッチの値を取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="Left" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="左回りの指令を出すスイッチの値を取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedBooleanSeq" rtc:name="BumperCheck" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedBooleanSeq" rtcDoc:description="bumperの当たり判定を取得するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="RIGHT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedVelocity2D" rtc:name="Velocity" rtc:portType="DataOutPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedVelocity2D" rtcDoc:description="kobukiへの速度指令値を出力するポート。"/>
+    </rtc:DataPorts>
+    <rtc:Language xsi:type="rtcExt:language_ext" rtc:kind="C++"/>
+</rtc:RtcProfile>

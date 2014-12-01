@@ -1,0 +1,147 @@
+ThresholdingName - English
+========================
+
+.. toctree::
+   :hidden:
+
+   index_j
+
+
+Introduction
+============
+
+
+For a full list of classes and functions, see the `API documentation`_.
+
+.. _`API Documentation`:
+   doxygen/html/index.html
+
+Requirements
+============
+
+Thresholding uses the `CMake build system`. You will need at least version
+2.8 to be able to build the component.
+
+.. _`CMAke build system`:
+   http://www.cmake.org
+
+
+Installation
+============
+
+Binary
+------
+
+Users of Windows can install the component using the binary installer. This
+will install the component and all its necessary dependencies. It is the
+recommended method of installation in Windows.
+
+- Download the installer from the website.
+- Double-click the executable file to begin installation.
+- Follow the instructions to install the component.
+- You may need to restart your computer for environment variable changes
+  to take effect before using the component.
+
+The component can be launched by double-clicking the
+``ThresholdingComp`` executable. The ``Thresholding`` library
+is available for loading into a manager, using the initialisation function
+``ThresholdingInit``.
+
+From source
+-----------
+
+Follow these steps to install Thresholding from source in any operating
+system:
+
+- Download the source, either from the repository or a source archive,
+  and extract it somewhere::
+
+    tar -xvzf Thresholding-1.0.0.tar.gz
+
+- Change to the directory containing the extracted source::
+
+    cd Thresholding-1.0.0
+
+- Create a directory called ``build``::
+
+    mkdir build
+
+- Change to that directory::
+
+    cd build
+
+- Run cmake or cmake-gui::
+
+    cmake ../
+
+- If no errors occurred, run make::
+
+    make
+
+- Finally, install the component. Ensure the necessary permissions to
+  install into the chosen prefix are available::
+
+    make install
+
+- The install destination can be changed by executing ccmake and changing
+  the variable ``CMAKE_INSTALL_PREFIX``::
+
+    ccmake ../
+
+The component is now ready for use. See the next section for instructions on
+configuring the component.
+
+Thresholding can be launched in stand-alone mode by executing the
+``ThresholdingComp`` executable (installed into ``${prefix}/components/bin``).
+Alternatively, ``libThresholding.so`` can be loaded into a manager, using the
+initialisation function ``ThresholdingInit``. This shared object can be found in
+``${prefix}/components/lib`` or ``${prefix}/components/lib64``.
+
+
+Configuration
+=============
+
+The available configuration parameters are described below:
+
+================ ================== ================ ======
+Parameter        Data type          Default Value    Effect
+================ ================== ================ ======
+Threshold        double             50.0             閾値。
+Threshold_Mode   int                0                どの閾値を使用するか選択する。<br/>0ならばConfiguration：Threshold、1ならばInPort：DoubleInData、2ならばInPort：ShortInData<br/>が閾値として用いられる。
+OutDataValue     std::vector<short> 0,0,1            出力する値。<br/>値は要素数0から順に閾値より小さい、閾値と等しい、閾値より大きいとなる。
+================ ================== ================ ======
+
+Ports
+=====
+
+The ports provided by the component are described below:
+
+=============== =========== ============================== =======
+Name            Type        Data type                      Purpose
+=============== =========== ============================== =======
+DoubleInData    InPort      RTC::TimedDouble               double型のデータを入力するポート。
+ShortInData     InPort      RTC::TimedShort                short型のデータを入力するポート。
+DoubleThreshold InPort      RTC::TimedDouble               閾値となるdouble型を入力するポート。
+ShortThreshold  InPort      RTC::TimedShort                閾値となるshort型を入力するポート。
+OutData         OutPort     RTC::TimedShort                二値化された値を出力するポート。
+=============== =========== ============================== =======
+
+Examples
+========
+
+An example configuration file is provided in the
+``${prefix}/components/share/Thresholding/examples/conf/`` directory.
+
+Changelog
+=========
+
+
+
+License
+=======
+
+This software is developed at the National Institute of Advanced
+Industrial Science and Technology. Approval number H23PRO-????. This
+software is licensed under the Lesser General Public License. See
+COPYING.LESSER.
+

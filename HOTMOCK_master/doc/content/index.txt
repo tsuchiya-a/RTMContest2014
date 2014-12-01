@@ -1,0 +1,151 @@
+HOTMOCK_masterName - English
+========================
+
+.. toctree::
+   :hidden:
+
+   index_j
+
+
+Introduction
+============
+
+
+For a full list of classes and functions, see the `API documentation`_.
+
+.. _`API Documentation`:
+   doxygen/html/index.html
+
+Requirements
+============
+
+HOTMOCK_master uses the `CMake build system`. You will need at least version
+2.8 to be able to build the component.
+
+.. _`CMAke build system`:
+   http://www.cmake.org
+
+
+Installation
+============
+
+Binary
+------
+
+Users of Windows can install the component using the binary installer. This
+will install the component and all its necessary dependencies. It is the
+recommended method of installation in Windows.
+
+- Download the installer from the website.
+- Double-click the executable file to begin installation.
+- Follow the instructions to install the component.
+- You may need to restart your computer for environment variable changes
+  to take effect before using the component.
+
+The component can be launched by double-clicking the
+``HOTMOCK_masterComp`` executable. The ``HOTMOCK_master`` library
+is available for loading into a manager, using the initialisation function
+``HOTMOCK_masterInit``.
+
+From source
+-----------
+
+Follow these steps to install HOTMOCK_master from source in any operating
+system:
+
+- Download the source, either from the repository or a source archive,
+  and extract it somewhere::
+
+    tar -xvzf HOTMOCK_master-1.0.0.tar.gz
+
+- Change to the directory containing the extracted source::
+
+    cd HOTMOCK_master-1.0.0
+
+- Create a directory called ``build``::
+
+    mkdir build
+
+- Change to that directory::
+
+    cd build
+
+- Run cmake or cmake-gui::
+
+    cmake ../
+
+- If no errors occurred, run make::
+
+    make
+
+- Finally, install the component. Ensure the necessary permissions to
+  install into the chosen prefix are available::
+
+    make install
+
+- The install destination can be changed by executing ccmake and changing
+  the variable ``CMAKE_INSTALL_PREFIX``::
+
+    ccmake ../
+
+The component is now ready for use. See the next section for instructions on
+configuring the component.
+
+HOTMOCK_master can be launched in stand-alone mode by executing the
+``HOTMOCK_masterComp`` executable (installed into ``${prefix}/components/bin``).
+Alternatively, ``libHOTMOCK_master.so`` can be loaded into a manager, using the
+initialisation function ``HOTMOCK_masterInit``. This shared object can be found in
+``${prefix}/components/lib`` or ``${prefix}/components/lib64``.
+
+
+Configuration
+=============
+
+The available configuration parameters are described below:
+
+================ ================== ================ ======
+Parameter        Data type          Default Value    Effect
+================ ================== ================ ======
+SettingFilename  string             *.hmst           HOTMOCKSettingによって作成されたHOTMOCKデバイスの設定ファイル名。
+IPAddress        string             127.0.0.1        HOTMOCKSettingのIPアドレス。
+PortNumber       int                8888             HOTMOCKSettingのPort番号。
+GetDataType      std::vector<int>   0,0,0,0          HOTMOCKデバイスからの入力を取得する際、<br/>0ならば生値を取得、1ならば工業変換値を取得する。<br/>配列0から順にAI,PI,TS,GSの設定をする。
+================ ================== ================ ======
+
+Ports
+=====
+
+The ports provided by the component are described below:
+
+=============== =========== ============================== =======
+Name            Type        Data type                      Purpose
+=============== =========== ============================== =======
+DO              InPort      RTC::TimedShort                HOTMOCKデバイスのDO*に送信するデジタル出力値を取得するポート。
+AO              InPort      RTC::TimedDouble               HOTMOCKデバイスのAO*に送信するアナログ出力値を取得するポート。
+Reset_PI        InPort      RTC::TimedBoolean              HOTMOCKデバイスのPI01につながっているパルス入力の積算値をリセットするためのフラグを取得するポート。
+DI              OutPort     RTC::TimedShort                HOTMOCKデバイスのDI*から受信したデジタル入力値を送るポート。
+AI              OutPort     RTC::TimedDouble               HOTMOCKデバイスのAI*から受信したアナログ入力値を送るポート。
+PI              OutPort     RTC::TimedDouble               HOTMOCKデバイスのPI*から受信したパルス入力値を送るポート。
+TS              OutPort     RTC::TimedDouble               HOTMOCKデバイス内蔵の温度センサから受信した値を送るポート。
+GS              OutPort     RTC::TimedDoubleSeq            HOTMOCKデバイス内蔵の加速度センサから受信した値を送るポート。<br/>値は要素数0から順にx,y,zの配列として送られる。
+=============== =========== ============================== =======
+
+Examples
+========
+
+An example configuration file is provided in the
+``${prefix}/components/share/HOTMOCK_master/examples/conf/`` directory.
+
+Changelog
+=========
+
+
+
+License
+=======
+
+This software is developed at the National Institute of Advanced
+Industrial Science and Technology. Approval number H23PRO-????. This
+software is licensed under the Lesser General Public License. See
+COPYING.LESSER.
+

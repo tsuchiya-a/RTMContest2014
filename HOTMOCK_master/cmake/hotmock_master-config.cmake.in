@@ -1,0 +1,54 @@
+# HOTMOCK_master CMake config file
+#
+# This file sets the following variables:
+# HOTMOCK_master_FOUND - Always TRUE.
+# HOTMOCK_master_INCLUDE_DIRS - Directories containing the HOTMOCK_master include files.
+# HOTMOCK_master_IDL_DIRS - Directories containing the HOTMOCK_master IDL files.
+# HOTMOCK_master_LIBRARIES - Libraries needed to use HOTMOCK_master.
+# HOTMOCK_master_DEFINITIONS - Compiler flags for HOTMOCK_master.
+# HOTMOCK_master_VERSION - The version of HOTMOCK_master found.
+# HOTMOCK_master_VERSION_MAJOR - The major version of HOTMOCK_master found.
+# HOTMOCK_master_VERSION_MINOR - The minor version of HOTMOCK_master found.
+# HOTMOCK_master_VERSION_REVISION - The revision version of HOTMOCK_master found.
+# HOTMOCK_master_VERSION_CANDIDATE - The candidate version of HOTMOCK_master found.
+
+message(STATUS "Found HOTMOCK_master-@PROJECT_VERSION@")
+set(HOTMOCK_master_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(HOTMOCK_master_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(HOTMOCK_master_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(HOTMOCK_master_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(HOTMOCK_master_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(HOTMOCK_master_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(HOTMOCK_master_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(HOTMOCK_master_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(HOTMOCK_master_VERSION @PROJECT_VERSION@)
+set(HOTMOCK_master_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(HOTMOCK_master_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(HOTMOCK_master_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(HOTMOCK_master_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

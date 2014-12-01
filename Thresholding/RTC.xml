@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rtc:RtcProfile rtc:version="0.2" rtc:id="RTC:Ayaka Tsuchiya:tool:Thresholding:1.0.0" xmlns:rtcExt="http://www.openrtp.org/namespaces/rtc_ext" xmlns:rtcDoc="http://www.openrtp.org/namespaces/rtc_doc" xmlns:rtc="http://www.openrtp.org/namespaces/rtc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <rtc:BasicInfo xsi:type="rtcExt:basic_info_ext" rtcExt:saveProject="Thresholding" rtc:updateDate="2014-10-30T12:54:37+09:00" rtc:creationDate="2014-10-30T12:54:37+09:00" rtc:abstract="入力された値と閾値を比較して、二値化した値を出力するコンポーネント。" rtc:version="1.0.0" rtc:vendor="Ayaka Tsuchiya" rtc:maxInstances="1" rtc:executionType="PeriodicExecutionContext" rtc:executionRate="1000.0" rtc:description="Send Command by Thresholding the Configuration" rtc:category="tool" rtc:componentKind="DataFlowComponent" rtc:activityType="PERIODIC" rtc:componentType="COMMUTATIVE" rtc:name="Thresholding">
+        <rtcDoc:Doc rtcDoc:reference="" rtcDoc:license="" rtcDoc:creator="土屋彩茜&lt;br/&gt;ma14076@shibaura-it.ac.jp" rtcDoc:algorithm="" rtcDoc:inout="InPort:&lt;name&gt;/&lt;datatype&gt;/&lt;documentation&gt;&lt;br/&gt;DoubleInData/TimedDouble/double型のデータを入力するポート。&lt;br/&gt;ShortInData/TimedShort/short型のデータを入力するポート。&lt;br/&gt;DoubleThreshold/TimedDouble/閾値となるdouble型を入力するポート。&lt;br/&gt;ShortThreshold/TimedShort/閾値となるshort型を入力するポート。&lt;br/&gt;&lt;br/&gt;OutPort:&lt;name&gt;/&lt;datatype&gt;/&lt;documentation&gt;&lt;br/&gt;OutData/TimedShort/二値化された値を出力するポート。&lt;br/&gt;&lt;br/&gt;Configuration:&lt;name&gt;/&lt;datatype&gt;/&lt; default&gt;/&lt;widget&gt;/&lt;documentation&gt;&lt;br/&gt;Threshold/double/50.0/text/閾値。&lt;br/&gt;Threshold_Mode/int/0/radio/どの閾値を使用するか選択する。0ならばConfiguration：Threshold、1ならばInPort：DoubleInData、2ならばInPort：ShortInDataが閾値として用いられる。&lt;br/&gt;OutDataValue/std::vector&lt;short&gt;/0,0,1/出力する値。値は要素数0から順に閾値より小さい、閾値と等しい、閾値より大きいとなる。" rtcDoc:description="入力された値と閾値を比較して、二値化した値を出力するコンポーネント。&lt;br/&gt;閾値と出力する値はConfigurationで設定する。&lt;br/&gt;設定された値が不適切な場合はエラーになる。"/>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+        <rtcExt:VersionUpLogs></rtcExt:VersionUpLogs>
+    </rtc:BasicInfo>
+    <rtc:Actions>
+        <rtc:OnInitialize xsi:type="rtcDoc:action_status_doc" rtc:implemented="true"/>
+        <rtc:OnFinalize xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnStartup xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnShutdown xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnActivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="ポートを初期化する。"/>
+        </rtc:OnActivated>
+        <rtc:OnDeactivated xsi:type="rtcDoc:action_status_doc" rtc:implemented="true"/>
+        <rtc:OnAborting xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnError xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnReset xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnExecute xsi:type="rtcDoc:action_status_doc" rtc:implemented="true">
+            <rtcDoc:Doc rtcDoc:postCondition="" rtcDoc:preCondition="" rtcDoc:description="入力された値と閾値を比較して、二値化した値を出力する。"/>
+        </rtc:OnExecute>
+        <rtc:OnStateUpdate xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnRateChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnAction xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+        <rtc:OnModeChanged xsi:type="rtcDoc:action_status_doc" rtc:implemented="false"/>
+    </rtc:Actions>
+    <rtc:ConfigurationSet>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="50.0" rtc:type="double" rtc:name="Threshold">
+            <rtcDoc:Doc rtcDoc:constraint="" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="閾値。" rtcDoc:defaultValue="50.0" rtcDoc:dataname="Threshold"/>
+            <rtcExt:Properties rtcExt:value="text" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="0" rtc:type="int" rtc:name="Threshold_Mode">
+            <rtc:Constraint>
+                <rtc:ConstraintUnitType>
+                    <rtc:Or>
+                        <rtc:Constraint>
+                            <rtc:ConstraintUnitType>
+                                <rtc:propertyIsEqualTo rtc:matchCase="false">
+                                    <rtc:Literal>0</rtc:Literal>
+                                </rtc:propertyIsEqualTo>
+                            </rtc:ConstraintUnitType>
+                        </rtc:Constraint>
+                        <rtc:Constraint>
+                            <rtc:ConstraintUnitType>
+                                <rtc:propertyIsEqualTo rtc:matchCase="false">
+                                    <rtc:Literal>1</rtc:Literal>
+                                </rtc:propertyIsEqualTo>
+                            </rtc:ConstraintUnitType>
+                        </rtc:Constraint>
+                        <rtc:Constraint>
+                            <rtc:ConstraintUnitType>
+                                <rtc:propertyIsEqualTo rtc:matchCase="false">
+                                    <rtc:Literal>2</rtc:Literal>
+                                </rtc:propertyIsEqualTo>
+                            </rtc:ConstraintUnitType>
+                        </rtc:Constraint>
+                    </rtc:Or>
+                </rtc:ConstraintUnitType>
+            </rtc:Constraint>
+            <rtcDoc:Doc rtcDoc:constraint="(0,1,2)" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="どの閾値を使用するか選択する。&lt;br/&gt;0ならばConfiguration：Threshold、1ならばInPort：DoubleInData、2ならばInPort：ShortInData&lt;br/&gt;が閾値として用いられる。" rtcDoc:defaultValue="0" rtcDoc:dataname="Threshold_Mode"/>
+            <rtcExt:Properties rtcExt:value="radio" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+        <rtc:Configuration xsi:type="rtcExt:configuration_ext" rtcExt:variableName="" rtc:unit="" rtc:defaultValue="0,0,1" rtc:type="std::vector&lt;short&gt;" rtc:name="OutDataValue">
+            <rtcDoc:Doc rtcDoc:constraint="" rtcDoc:range="" rtcDoc:unit="" rtcDoc:description="出力する値。&lt;br/&gt;値は要素数0から順に閾値より小さい、閾値と等しい、閾値より大きいとなる。" rtcDoc:defaultValue="0,0,1" rtcDoc:dataname="OutDataValue"/>
+            <rtcExt:Properties rtcExt:value="text" rtcExt:name="__widget__"/>
+        </rtc:Configuration>
+    </rtc:ConfigurationSet>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedDouble" rtc:name="DoubleInData" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedDouble" rtcDoc:description="double型のデータを入力するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="ShortInData" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="short型のデータを入力するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedDouble" rtc:name="DoubleThreshold" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedDouble" rtcDoc:description="閾値となるdouble型を入力するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="LEFT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="ShortThreshold" rtc:portType="DataInPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="閾値となるshort型を入力するポート。"/>
+    </rtc:DataPorts>
+    <rtc:DataPorts xsi:type="rtcExt:dataport_ext" rtcExt:position="RIGHT" rtcExt:variableName="" rtc:unit="" rtc:subscriptionType="" rtc:dataflowType="" rtc:interfaceType="" rtc:idlFile="" rtc:type="RTC::TimedShort" rtc:name="OutData" rtc:portType="DataOutPort">
+        <rtcDoc:Doc rtcDoc:operation="" rtcDoc:occerrence="" rtcDoc:unit="" rtcDoc:semantics="" rtcDoc:number="" rtcDoc:type="TimedShort" rtcDoc:description="二値化された値を出力するポート。"/>
+    </rtc:DataPorts>
+    <rtc:Language xsi:type="rtcExt:language_ext" rtc:kind="C++"/>
+</rtc:RtcProfile>
