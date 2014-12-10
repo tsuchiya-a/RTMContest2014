@@ -19,11 +19,17 @@ Eclipse 3.8.1 + OpenRTM Eclipse tools 1.1.0-RC4
 HOTMOCK Settingとソケット通信を行い、RTミドルウェア上でHOTMOCKデバイスを使用するためのコンポーネントです。  
 Configurationでデバイスの設定ファイルを読み込むことができます。  
 
+![Alt text](http://blog-imgs-56.fc2.com/r/t/m/rtmediaart/GitHub_HOTMOCK_master_fig2.png)
+
 ###Thresholding###
 入力された値と閾値を比較して、結果を出力するコンポーネントです。  
 閾値と出力する値はConfigurationによって設定できます。
 
+![Alt text](http://blog-imgs-56.fc2.com/r/t/m/rtmediaart/GitHub_Thresholding.png)
+
 ###KobukiControllerByHMSwitches###
 HOTMOCKのスイッチによってKobukiを動かすためのデモンストレーション用コンポーネントです。  
+
+![Alt text](http://blog-imgs-56.fc2.com/r/t/m/rtmediaart/GitHub_KobukiControllerByHMSwitches.png)
 
 RTM2014
