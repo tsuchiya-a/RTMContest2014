@@ -5,9 +5,9 @@ RTMContest2014発表作品となります。
 
 動作環境
 --------
-Windows7 32bit,64bit
-OpenRTM-aist-1.1.0-RELEASE（C++版)
-Eclipse 3.8.1 + OpenRTM Eclipse tools 1.1.0-RC4
+Windows7 32bit,64bit  
+OpenRTM-aist-1.1.0-RELEASE（C++版)  
+Eclipse 3.8.1 + OpenRTM Eclipse tools 1.1.0-RC4  
 
 使用デバイス
 -----------
